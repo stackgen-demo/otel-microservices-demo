@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: llmservice
+    tag: 1.11.0-llm-service
   imagePullSecrets: []
   ingress:
     enabled: false

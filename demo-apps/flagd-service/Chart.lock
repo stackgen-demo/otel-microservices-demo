@@ -1,0 +1,6 @@
+dependencies:
+- name: basic-app
+  repository: https://registry.devopsnow.io/chartrepo/public
+  version: 0.1.7
+digest: sha256:a7fc412b67316e41e221543811c6f56db17a9b2008a89ae12796d76a002cd18e
+generated: "2025-11-25T16:59:54.373619+05:30"

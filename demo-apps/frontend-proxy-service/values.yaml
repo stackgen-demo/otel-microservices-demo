@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: frontendproxy
+    tag: 1.11.0-frontend-proxy-service
   imagePullSecrets: []
   ingress:
     enabled: false

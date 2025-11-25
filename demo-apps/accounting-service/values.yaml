@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: accountingservice
+    tag: 1.11.0-accounting-service
   imagePullSecrets: []
   ingress:
     enabled: false

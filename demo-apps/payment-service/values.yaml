@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: paymentservice
+    tag: 1.11.0-payment-service
   imagePullSecrets: []
   ingress:
     enabled: false

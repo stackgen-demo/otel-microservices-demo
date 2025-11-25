@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: frauddetectionservice
+    tag: 1.11.0-fraud-detection-service
   imagePullSecrets: []
   ingress:
     enabled: false

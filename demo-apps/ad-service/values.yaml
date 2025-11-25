@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: adservice
+    tag: 1.11.0-adservice
   imagePullSecrets: []
   ingress:
     enabled: false

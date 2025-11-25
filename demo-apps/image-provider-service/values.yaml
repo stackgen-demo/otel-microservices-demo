@@ -1,7 +1,7 @@
 basic-app:
   image:
     repository: ghcr.io/open-telemetry/demo
-    tag: imageprovider
+    tag: 1.11.0-image-provider
   imagePullSecrets: []
   ingress:
     enabled: false
