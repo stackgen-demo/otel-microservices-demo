@@ -1,0 +1,6 @@
+apiVersion: v2
+name: postgresql-service
+description: OpenTelemetry Demo - PostgreSQL Service
+version: 0.1.0
+appVersion: "2.1.3"
+

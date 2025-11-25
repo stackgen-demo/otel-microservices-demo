@@ -1,20 +1,20 @@
-basic-app:
-  image:
-    repository: ghcr.io/open-telemetry/demo
-    tag: 1.11.0-product-catalog
-  imagePullSecrets: []
-  ingress:
-    enabled: false
-  podAnnotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8080"
-    prometheus.io/path: "/metrics"
-  resource:
-    limits:
-      cpu: 500m
-      memory: 512Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-  service:
-    port: 8080
+replicaCount: 1
+
+image:
+  repository: ghcr.io/open-telemetry/demo
+  tag: "2.1.3-product-catalog"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: opentelemetry-demo
+
+env:
+  OTEL_COLLECTOR_NAME: "otel-collector"
+  OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative"
+  PRODUCT_CATALOG_PORT: "8080"
+  PRODUCT_CATALOG_RELOAD_INTERVAL: "10"
+  FLAGD_HOST: "flagd"
+  FLAGD_PORT: "8013"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://$(OTEL_COLLECTOR_NAME):4317"
+  GOMEMLIMIT: "16MiB"
+  OTEL_RESOURCE_ATTRIBUTES: "service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=2.1.3"

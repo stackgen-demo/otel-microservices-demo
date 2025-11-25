@@ -1,20 +1,17 @@
-basic-app:
-  image:
-    repository: ghcr.io/open-telemetry/demo
-    tag: 1.11.0-image-provider
-  imagePullSecrets: []
-  ingress:
-    enabled: false
-  podAnnotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8080"
-    prometheus.io/path: "/metrics"
-  resource:
-    limits:
-      cpu: 500m
-      memory: 512Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-  service:
-    port: 8080
+replicaCount: 1
+
+image:
+  repository: ghcr.io/open-telemetry/demo
+  tag: "2.1.3-image-provider"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: opentelemetry-demo
+
+env:
+  OTEL_COLLECTOR_NAME: "otel-collector"
+  OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative"
+  IMAGE_PROVIDER_PORT: "8081"
+  OTEL_COLLECTOR_PORT_GRPC: "4317"
+  OTEL_COLLECTOR_HOST: "$(OTEL_COLLECTOR_NAME)"
+  OTEL_RESOURCE_ATTRIBUTES: "service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=2.1.3"
