@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: valkey-cart
+  labels:
+    app.kubernetes.io/name: {{ include "valkey-cart-service.name" . }}
+    app.kubernetes.io/component: valkey-cart
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6379
+      targetPort: valkey-cart
+      protocol: TCP
+      name: valkey-cart
+  selector:
+    app.kubernetes.io/component: valkey-cart
+

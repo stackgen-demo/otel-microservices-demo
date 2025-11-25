@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flagd-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "flagd-service.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  demo.flagd.json: |
+    {
+      "$schema": "https://flagd.dev/schema/v0/flags.json",
+      "flags": {
+        "v2Enabled": {
+          "state": "ENABLED",
+          "variants": {
+            "on": true,
+            "off": false
+          },
+          "defaultVariant": "off"
+        },
+        "cartServiceFailure": {
+          "state": "ENABLED",
+          "variants": {
+            "0": 0,
+            "1": 1,
+            "2": 2,
+            "3": 3
+          },
+          "defaultVariant": "0"
+        },
+        "recommendationCache": {
+          "state": "ENABLED",
+          "variants": {
+            "enabled": true,
+            "disabled": false
+          },
+          "defaultVariant": "disabled"
+        }
+      }
+    }
+

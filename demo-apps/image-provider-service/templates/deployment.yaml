@@ -36,4 +36,11 @@ spec:
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
+          resources:
+            limits:
+              memory: 50Mi
+          {{- if .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml .Values.volumeMounts | nindent 12 }}
+          {{- end }}
 

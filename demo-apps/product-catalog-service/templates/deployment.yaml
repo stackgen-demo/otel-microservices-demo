@@ -36,4 +36,11 @@ spec:
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
+          volumeMounts:
+            - name: product-catalog-products
+              mountPath: /usr/src/app/products
+      volumes:
+        - name: product-catalog-products
+          configMap:
+            name: product-catalog-products
 

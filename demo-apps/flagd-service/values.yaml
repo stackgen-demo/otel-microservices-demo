@@ -1,6 +1,6 @@
 replicaCount: 1
 
-  image:
+image:
   repository: ghcr.io/open-feature/flagd
   tag: "v0.12.8"
   pullPolicy: IfNotPresent

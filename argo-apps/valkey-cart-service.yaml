@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: product-reviews-service
+  name: valkey-cart-service
   namespace: devopsnow
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/appcd-dev/otel-microservices-demo.git
     targetRevision: HEAD
-    path: demo-apps/product-reviews-service
+    path: demo-apps/valkey-cart-service
   destination:
     server: https://kubernetes.default.svc
     namespace: opsverse-demo
@@ -28,3 +28,4 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 3m
+

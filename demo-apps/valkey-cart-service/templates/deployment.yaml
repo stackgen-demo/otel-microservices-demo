@@ -1,37 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "flagd-service.fullname" . }}
+  name: {{ include "valkey-cart-service.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "flagd-service.name" . }}
-    app.kubernetes.io/component: flagd
+    app.kubernetes.io/name: {{ include "valkey-cart-service.name" . }}
+    app.kubernetes.io/component: valkey-cart
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/component: flagd
+      app.kubernetes.io/component: valkey-cart
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: flagd
-        app.kubernetes.io/name: {{ include "flagd-service.name" . }}
+        app.kubernetes.io/component: valkey-cart
+        app.kubernetes.io/name: {{ include "valkey-cart-service.name" . }}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
-        - name: flagd
+        - name: valkey-cart
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.command }}
-          command:
-            {{- range .Values.command }}
-            - {{ . | quote }}
-            {{- end }}
-          {{- end }}
           ports:
-            {{- range .Values.ports }}
-            - containerPort: {{ .containerPort }}
-              name: {{ .name }}
-            {{- end }}
+            - containerPort: 6379
+              name: valkey-cart
           env:
             # Dynamic Service name from metadata.label
             - name: OTEL_SERVICE_NAME
@@ -44,11 +36,4 @@ spec:
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
-          volumeMounts:
-            - name: config-rw
-              mountPath: /etc/flagd
-      volumes:
-        - name: config-rw
-          configMap:
-            name: flagd-config
 
