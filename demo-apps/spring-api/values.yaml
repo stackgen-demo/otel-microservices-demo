@@ -1,0 +1,18 @@
+basic-app:
+  image:
+    repository: registry.devopsnow.io/public/sample/sample-java
+    tag: 1
+  imagePullSecrets:
+  - name: devopsnow-docker-reg-crd
+  ingress:
+    enabled: false
+  podAnnotations:
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+  resource:
+    limits:
+      cpu: 1
+      memory: 1024Mi
+  service:
+    port: 8080
