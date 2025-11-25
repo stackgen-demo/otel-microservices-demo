@@ -1,0 +1,8 @@
+apiVersion: v2
+name: accounting-service
+description: OpenTelemetry Demo - Accounting Service (.NET)
+version: 0.0.1
+dependencies:
+  - name: basic-app
+    version: 0.1.7
+    repository: https://registry.devopsnow.io/chartrepo/public

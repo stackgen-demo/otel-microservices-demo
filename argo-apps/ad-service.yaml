@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ad-service
+  namespace: devopsnow
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/appcd-dev/otel-microservices-demo.git
+    targetRevision: HEAD
+    path: demo-apps/ad-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: opsverse-demo
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - Validate=false
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

@@ -1,0 +1,8 @@
+apiVersion: v2
+name: image-provider-service
+description: OpenTelemetry Demo - Image Provider Service (nginx/C++)
+version: 0.0.1
+dependencies:
+  - name: basic-app
+    version: 0.1.7
+    repository: https://registry.devopsnow.io/chartrepo/public
