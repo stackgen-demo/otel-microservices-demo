@@ -25,7 +25,8 @@ ports:
     name: ofrep
 
 env:
-  OTEL_COLLECTOR_NAME: "otel-collector"
+  OTEL_COLLECTOR_NAME: "otel-collector.devopsnow.svc.cluster.local"
+  OTEL_LOGS_EXPORTER: "none"
   OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative"
   FLAGD_METRICS_EXPORTER: "otel"
   FLAGD_OTEL_COLLECTOR_URI: "$(OTEL_COLLECTOR_NAME):4317"

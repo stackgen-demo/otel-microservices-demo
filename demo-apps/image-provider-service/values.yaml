@@ -9,7 +9,8 @@ serviceAccount:
   name: opentelemetry-demo
 
 env:
-  OTEL_COLLECTOR_NAME: "otel-collector"
+  OTEL_COLLECTOR_NAME: "otel-collector.devopsnow.svc.cluster.local"
+  OTEL_LOGS_EXPORTER: "none"
   OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative"
   IMAGE_PROVIDER_PORT: "8081"
   OTEL_COLLECTOR_PORT_GRPC: "4317"

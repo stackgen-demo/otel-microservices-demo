@@ -9,7 +9,8 @@ serviceAccount:
   name: opentelemetry-demo
 
 env:
-  OTEL_COLLECTOR_NAME: "otel-collector"
+  OTEL_COLLECTOR_NAME: "otel-collector.devopsnow.svc.cluster.local"
+  OTEL_LOGS_EXPORTER: "none"
   OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative"
   LOCUST_WEB_HOST: "0.0.0.0"
   LOCUST_WEB_PORT: "8089"
