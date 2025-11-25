@@ -1,0 +1,6 @@
+apiVersion: v2
+name: valkey-cart-service
+description: OpenTelemetry Demo - Valkey Cart Service (Redis-compatible)
+version: 0.1.0
+appVersion: "8.1.3"
+

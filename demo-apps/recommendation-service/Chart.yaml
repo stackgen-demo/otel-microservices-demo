@@ -1,0 +1,5 @@
+apiVersion: v2
+name: recommendation-service
+description: OpenTelemetry Demo - Recommendation Service (Python)
+version: 0.1.0
+appVersion: "2.1.3"

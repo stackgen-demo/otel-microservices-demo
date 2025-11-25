@@ -1,0 +1,5 @@
+apiVersion: v2
+name: flagd-ui-service
+description: OpenTelemetry Demo - Flagd UI Service (Elixir)
+version: 0.1.0
+appVersion: "2.1.3"

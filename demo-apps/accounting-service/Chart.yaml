@@ -1,0 +1,5 @@
+apiVersion: v2
+name: accounting-service
+description: OpenTelemetry Demo - Accounting Service (.NET)
+version: 0.1.0
+appVersion: "2.1.3"

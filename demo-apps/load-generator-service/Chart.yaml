@@ -1,0 +1,6 @@
+apiVersion: v2
+name: load-generator-service
+description: OpenTelemetry Demo - Load Generator Service (Locust)
+version: 0.1.0
+appVersion: "2.1.3"
+

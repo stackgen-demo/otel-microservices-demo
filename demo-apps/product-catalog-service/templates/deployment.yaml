@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "product-catalog-service.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "product-catalog-service.name" . }}
+    app.kubernetes.io/component: product-catalog
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: product-catalog
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: product-catalog
+        app.kubernetes.io/name: {{ include "product-catalog-service.name" . }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+        - name: product-catalog
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+              name: service
+          env:
+            # Dynamic Service name from metadata.label
+            - name: OTEL_SERVICE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
+            # Direct env from values.yaml (loop)
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          volumeMounts:
+            - name: product-catalog-products
+              mountPath: /usr/src/app/products
+      volumes:
+        - name: product-catalog-products
+          configMap:
+            name: product-catalog-products
+

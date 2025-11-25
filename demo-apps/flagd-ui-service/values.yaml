@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/open-telemetry/demo
+  tag: "2.1.3-flagd-ui"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: opentelemetry-demo
+
+env:
+  OTEL_COLLECTOR_NAME: "otel-collector.devopsnow.svc.cluster.local"
+  OTEL_LOGS_EXPORTER: "none"
+  OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative"
+  FLAGD_METRICS_EXPORTER: "otel"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://$(OTEL_COLLECTOR_NAME):4318"
+  FLAGD_UI_PORT: "4000"
+  SECRET_KEY_BASE: "yYrECL4qbNwleYInGJYvVnSkwJuSQJ4ijPTx5tirGUXrbznFIBFVJdPl5t6O9ASw"
+  PHX_HOST: "localhost"
+  OTEL_RESOURCE_ATTRIBUTES: "service.name=$(OTEL_SERVICE_NAME),service.namespace=opentelemetry-demo,service.version=2.1.3"

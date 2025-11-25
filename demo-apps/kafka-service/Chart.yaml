@@ -1,0 +1,6 @@
+apiVersion: v2
+name: kafka-service
+description: OpenTelemetry Demo - Kafka Service
+version: 0.1.0
+appVersion: "2.1.3"
+

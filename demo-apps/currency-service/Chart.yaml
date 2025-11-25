@@ -1,0 +1,5 @@
+apiVersion: v2
+name: currency-service
+description: OpenTelemetry Demo - Currency Service (C++)
+version: 0.1.0
+appVersion: "2.1.3"

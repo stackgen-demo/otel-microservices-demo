@@ -1,0 +1,5 @@
+apiVersion: v2
+name: flagd-service
+description: OpenTelemetry Demo - Flagd Service (Go)
+version: 0.1.0
+appVersion: "v0.12.8"

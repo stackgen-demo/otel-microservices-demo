@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flagd-ui-service.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "flagd-ui-service.name" . }}
+    app.kubernetes.io/component: flagd-ui
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: flagd-ui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: flagd-ui
+        app.kubernetes.io/name: {{ include "flagd-ui-service.name" . }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+        - name: flagd-ui
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 4000
+              name: service
+          env:
+            # Dynamic Service name from metadata.label
+            - name: OTEL_SERVICE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
+            # Direct env from values.yaml (loop)
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          volumeMounts:
+            - name: config-rw
+              mountPath: /app/data
+      volumes:
+        - name: config-rw
+          configMap:
+            name: flagd-config
+
