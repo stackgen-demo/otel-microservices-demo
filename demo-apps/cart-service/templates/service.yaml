@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart
+  labels:
+    app.kubernetes.io/name: {{ include "cart-service.name" . }}
+    app.kubernetes.io/component: cart
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      name: tcp-service
+      targetPort: service
+  selector:
+    app.kubernetes.io/component: cart

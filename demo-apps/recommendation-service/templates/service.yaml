@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendation
+  labels:
+    app.kubernetes.io/name: {{ include "recommendation-service.name" . }}
+    app.kubernetes.io/component: recommendation
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      name: tcp-service
+      targetPort: service
+  selector:
+    app.kubernetes.io/component: recommendation

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-generator
+  labels:
+    app.kubernetes.io/name: {{ include "load-generator-service.name" . }}
+    app.kubernetes.io/component: load-generator
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8089
+      name: tcp-service
+      targetPort: service
+  selector:
+    app.kubernetes.io/component: load-generator
