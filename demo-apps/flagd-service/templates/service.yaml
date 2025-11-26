@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flagd
+  labels:
+    app.kubernetes.io/name: {{ include "flagd-service.name" . }}
+    app.kubernetes.io/component: flagd
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8013
+      name: rpc
+      targetPort: rpc
+  selector:
+    app.kubernetes.io/component: flagd

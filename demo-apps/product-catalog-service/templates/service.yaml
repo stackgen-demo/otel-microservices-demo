@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-catalog
+  labels:
+    app.kubernetes.io/name: {{ include "product-catalog-service.name" . }}
+    app.kubernetes.io/component: product-catalog
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      name: tcp-service
+      targetPort: service
+  selector:
+    app.kubernetes.io/component: product-catalog
