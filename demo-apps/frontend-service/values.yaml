@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/open-telemetry/demo
+  repository: 339712749745.dkr.ecr.us-east-1.amazonaws.com/opentelemetry-demo/frontend-service
   tag: "2.1.3-frontend"
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 serviceAccount:
   name: opentelemetry-demo
