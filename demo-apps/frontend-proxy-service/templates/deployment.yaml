@@ -31,18 +31,25 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.labels['app.kubernetes.io/component']
+            # Cart Service Configuration from ConfigMap
+            - name: CART_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-proxy-cart-config
+                  key: CART_HOST
+            - name: CART_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-proxy-cart-config
+                  key: CART_PORT
+            - name: CART_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-proxy-cart-config
+                  key: CART_SERVICE_URL
             # Direct env from values.yaml (loop)
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
-          volumeMounts:
-            - name: envoy-config
-              mountPath: /home/envoy/envoy.yaml
-              subPath: envoy.yaml
-              readOnly: true
-      volumes:
-        - name: envoy-config
-          configMap:
-            name: {{ include "frontend-proxy-service.fullname" . }}-envoy-config
 
