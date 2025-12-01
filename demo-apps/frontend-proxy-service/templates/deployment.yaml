@@ -38,12 +38,11 @@ spec:
             {{- end }}
           volumeMounts:
             - name: envoy-config
-              mountPath: /home/envoy
+              mountPath: /home/envoy/envoy.yaml
+              subPath: envoy.yaml
               readOnly: true
       volumes:
         - name: envoy-config
           configMap:
             name: {{ include "frontend-proxy-service.fullname" . }}-envoy-config
-            items:
-              - key: envoy.tmpl.yaml
-                path: envoy.tmpl.yaml
+
