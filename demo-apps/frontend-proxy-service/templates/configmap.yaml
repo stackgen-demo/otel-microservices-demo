@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-proxy-cart-config
+  labels:
+    app.kubernetes.io/name: {{ include "frontend-proxy-service.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  CART_HOST: "cart"
+  CART_PORT: "8080"
+  CART_SERVICE_URL: "http://cart:8080"
+

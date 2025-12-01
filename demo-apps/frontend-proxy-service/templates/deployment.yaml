@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "frontend-proxy-service.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "frontend-proxy-service.name" . }}
+    app.kubernetes.io/component: frontend-proxy
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: frontend-proxy
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: frontend-proxy
+        app.kubernetes.io/name: {{ include "frontend-proxy-service.name" . }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+        - name: frontend-proxy
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+              name: service
+          env:
+            # Dynamic Service name from metadata.label
+            - name: OTEL_SERVICE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
+            # Cart Service Configuration from ConfigMap
+            - name: CART_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-proxy-cart-config
+                  key: CART_HOST
+            - name: CART_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-proxy-cart-config
+                  key: CART_PORT
+            - name: CART_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-proxy-cart-config
+                  key: CART_SERVICE_URL
+            # Direct env from values.yaml (loop)
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+
