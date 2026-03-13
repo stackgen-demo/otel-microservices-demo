@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: 339712749745.dkr.ecr.us-east-1.amazonaws.com/opentelemetry-demo/product-catalog-service
-  tag: "2.1.4-product-catalog"
+  tag: "2.1.5-product-catalog"
   pullPolicy: Always
 
 serviceAccount:
