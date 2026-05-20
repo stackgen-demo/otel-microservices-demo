@@ -2,13 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgresql-service
-  namespace: devopsnow
+  namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/appcd-dev/otel-microservices-demo.git
+    repoURL: https://github.com/stackgen-demo/otel-microservices-demo.git
     targetRevision: HEAD
     path: demo-apps/postgresql-service
   destination:
