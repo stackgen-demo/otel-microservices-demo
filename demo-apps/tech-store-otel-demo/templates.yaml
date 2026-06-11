@@ -114,6 +114,10 @@ spec:
     spec:
       nodeSelector:
         machine-type: amd64
+      hostAliases:
+        - ip: "10.100.75.82"
+          hostnames:
+            - "mysql.tech-store-otel-demo.svc.cluster.local"
       containers:
         - name: tech-store-user-service
           image: "registry.devopsnow.io/private/otel-demo-services/tech-store-user-service:latest"
@@ -153,10 +157,20 @@ spec:
     spec:
       nodeSelector:
         machine-type: amd64
+      hostAliases:
+        - ip: "10.100.75.82"
+          hostnames:
+            - "mysql.tech-store-otel-demo.svc.cluster.local"
+        - ip: "10.100.132.252"
+          hostnames:
+            - "user-service.tech-store-otel-demo.svc.cluster.local"
       containers:
         - name: tech-store-payment-service
           image: "registry.devopsnow.io/private/otel-demo-services/tech-store-payment-service:latest"
           imagePullPolicy: IfNotPresent
+          env:
+            - name: PAYMENT_PORT
+              value: "8080"
           ports:
             - containerPort: 8080
       imagePullSecrets:
@@ -192,6 +206,10 @@ spec:
     spec:
       nodeSelector:
         machine-type: amd64
+      hostAliases:
+        - ip: "10.100.75.82"
+          hostnames:
+            - "mysql.tech-store-otel-demo.svc.cluster.local"
       containers:
         - name: tech-store-order-service
           image: "registry.devopsnow.io/private/otel-demo-services/tech-store-order-service:latest"
