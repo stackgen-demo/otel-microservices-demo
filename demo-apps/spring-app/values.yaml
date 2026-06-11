@@ -14,5 +14,7 @@ basic-app:
     limits:
       cpu: 1
       memory: 1024Mi
+  nodeSelector:
+    machine-type: amd64
   service:
     port: 8080
