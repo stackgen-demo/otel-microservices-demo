@@ -49,6 +49,8 @@ spec:
       labels:
         app: mysql
     spec:
+      nodeSelector:
+        machine-type: amd64
       containers:
       - image: mysql:latest
         name: mysql
@@ -110,6 +112,8 @@ spec:
       labels:
         app: tech-store-user-service
     spec:
+      nodeSelector:
+        machine-type: amd64
       containers:
         - name: tech-store-user-service
           image: "registry.devopsnow.io/private/otel-demo-services/tech-store-user-service:latest"
@@ -147,6 +151,8 @@ spec:
       labels:
         app: tech-store-payment-service
     spec:
+      nodeSelector:
+        machine-type: amd64
       containers:
         - name: tech-store-payment-service
           image: "registry.devopsnow.io/private/otel-demo-services/tech-store-payment-service:latest"
@@ -184,6 +190,8 @@ spec:
       labels:
         app: tech-store-order-service
     spec:
+      nodeSelector:
+        machine-type: amd64
       containers:
         - name: tech-store-order-service
           image: "registry.devopsnow.io/private/otel-demo-services/tech-store-order-service:latest"
@@ -217,6 +225,8 @@ spec:
     spec:
       template:
         spec:
+          nodeSelector:
+            machine-type: amd64
           containers:
           - name: load-generator
             image: curlimages/curl
